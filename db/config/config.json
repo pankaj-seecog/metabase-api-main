@@ -1,0 +1,13 @@
+{
+	"development": {
+		"host": "dashboards.cax7lg6eu2db.ap-south-1.rds.amazonaws.com",
+        "user": "admin",
+        "password": "pingpong123",
+        "database": "data",
+        "port": 3306,
+        "waitForConnections": true,
+        "connectionLimit": 20,
+        "queueLimit": 0
+      
+	}
+}
