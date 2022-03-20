@@ -49,8 +49,8 @@ app.use(
 );
 // app.use("/v1", subpath);
 // var swagger = require('swagger-node-express').createNew(subpath);
-console.log("====> ",path.join(__dirname,"./client/build"))
-app.use(express.static(path.join(__dirname,"./client/build")));
+console.log("====> ",path.join(__dirname,"./client/mybuild"))
+app.use(express.static(path.join(__dirname,"./client/mybuild")));
 // swagger.setApiInfo({
 // 	title: 'Metabase Query API',
 // 	description: '',
