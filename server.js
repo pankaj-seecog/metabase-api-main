@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 const app = express();
 var subpath = express();
 var cors = require('cors');
+var path=require("path");
 
 // CONTROLLERS
 var accuraryCtrl = require('./controllers/accuracy');
@@ -46,19 +47,20 @@ app.use(
 		extended: true
 	})
 );
-app.use("/v1", subpath);
-var swagger = require('swagger-node-express').createNew(subpath);
-app.use(express.static('swagger'));
-swagger.setApiInfo({
-	title: 'Metabase Query API',
-	description: '',
-	termsOfServiceUrl: '',
-	contact: '',
-	license: '',
-	licenseUrl: ''
-});
-// Set api-doc path
-swagger.configureSwaggerPaths('', 'api-docs', '');
+// app.use("/v1", subpath);
+// var swagger = require('swagger-node-express').createNew(subpath);
+console.log("====> ",path.join(__dirname,"./client/build"))
+app.use(express.static(path.join(__dirname,"./client/build")));
+// swagger.setApiInfo({
+// 	title: 'Metabase Query API',
+// 	description: '',
+// 	termsOfServiceUrl: '',
+// 	contact: '',
+// 	license: '',
+// 	licenseUrl: ''
+// });
+// // Set api-doc path
+// swagger.configureSwaggerPaths('', 'api-docs', '');
 
 // Configure the API domain
 var domain = 'localhost';
@@ -74,11 +76,14 @@ var port = 3000;
 // else console.log('No --port=xxx specified, taking default port ' + port + '.');
 
 // Set and display the application URL
-var applicationUrl = 'http://' +  + ':' + port;
-swagger.configure(applicationUrl, '1.0.0');
+// var applicationUrl = 'http://' +  + ':' + port;
+// swagger.configure(applicationUrl, '1.0.0');
 
 app.get('/', function(req, res) {
-	res.sendFile(__dirname + '/swagger/index.html');
+	// res.send("<h1>Hello world</h1>");
+	console.log("The path is ",__dirname+"/client/build/index.html")
+	res.sendFile(__dirname+"/client/build/index.html");
+		// res.sendFile(__dirname + '/swagger/index.html');
 });
 app.use('/api/getAccuracy', accuraryCtrl);
 app.use('/api/getAveragePrecision', averagePrecisionCtrl);
